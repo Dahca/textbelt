@@ -8,3 +8,5 @@ keys.json
 *~
 node_modules/
 nohup.out
+package-lock.json
+dump.rdb
