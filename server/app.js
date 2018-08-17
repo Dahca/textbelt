@@ -90,11 +90,13 @@ app.post('/text', function(req, res) {
     res.send({success:true, carriers:Object.keys(carriers).sort()});
     return;
   }
+
   var number = stripPhone(req.body.number);
   if (number.length < 9 || number.length > 10) {
     res.send({success:false, message:'Invalid phone number.'});
     return;
   }
+
   textRequestHandler(req, res, number, req.body.carrier, 'us', req.query.key);
 });
 
@@ -211,7 +213,7 @@ function textRequestHandler(req, res, number, carrier, region, key) {
         }
       });
     }, 1000*60*3);
-    if (num > 3) {
+    if (num > 1000) {
       //mpq.track('exceeded phone quota', tracking_details);
       res.send({success:false, message:'Exceeded quota for this phone number. ' + number});
       return;
